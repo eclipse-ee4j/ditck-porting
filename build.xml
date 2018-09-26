@@ -1,0 +1,160 @@
+<?xml version="1.0"?>
+<!--
+
+    Copyright (c) 2018 Oracle and/or its affiliates. All rights reserved.
+
+    This program and the accompanying materials are made available under the
+    terms of the Eclipse Public License v. 2.0, which is available at
+    http://www.eclipse.org/legal/epl-2.0.
+
+    This Source Code may also be made available under the following Secondary
+    Licenses when the conditions for such availability set forth in the
+    Eclipse Public License v. 2.0 are satisfied: GNU General Public License,
+    version 2 with the GNU Classpath Exception, which is available at
+    https://www.gnu.org/software/classpath/license.html.
+
+    SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
+
+-->
+
+<project name="330 TCK Glassfish Porting" default="dist" basedir=".">
+
+	<property file="${basedir}/build.properties" />
+
+	<property name="tck.version" value="1.0"/>
+	<property name="src" value="${basedir}/src" />
+	<property name="classes" value="${basedir}/classes" />
+	<property name="dist" value="${basedir}/dist" />
+	<property name="lib" value="${basedir}/lib" />
+	<property name="dist.file" value="330-tck-glassfish-porting" />
+	<property name="slf4j.jar" value="${porting.home}/lib/slf4j-simple-1.7.25.jar" />
+	<property name="junit.jar" value="${porting.home}/lib/junit-4.12.jar" />
+
+	<taskdef resource="net/sf/antcontrib/antlib.xml" classpath="${lib}/ant-contrib.jar" />
+
+	<path id="classpath">
+		<pathelement location="${junit.jar}"/>
+		<pathelement location="${glassfish.home}/modules/weld-osgi-bundle.jar"/>
+		<fileset dir="${glassfish.home}">
+			<include name="modules/*.jar" />
+		</fileset>
+		<fileset dir="${glassfish.home}">
+			<include name="lib/*.jar" />
+		</fileset>
+		<fileset dir="${299.tck.home}">
+			<include name="**/*.jar" />
+		</fileset>
+		<fileset dir="${tck.home}">
+			<include name="javax.inject-tck.jar" />
+		</fileset>
+		<fileset dir="${porting.home}/lib">
+			<include name="weld-inject-tck-runner-1.0.0-tests.jar" />
+		</fileset>
+                <pathelement location="${slf4j.jar}"/>
+	</path>
+    <!--Proxy information should be provided in ANT_OPTS env variable as set ANT_OPTS=-Dhttp.proxyHost=host -Dhttp.proxyPort=port-->
+	<target name="downloadDependencies">
+		<get src="http://central.maven.org/maven2/junit/junit/4.12/junit-4.12.jar" verbose="on" dest="lib"/>
+		<get src="http://central.maven.org/maven2/org/slf4j/slf4j-simple/1.7.25/slf4j-simple-1.7.25.jar" verbose="on" dest="lib"/>
+	</target>
+	<target name="run" depends="downloadDependencies">
+		<mkdir dir="${report.dir}"/>
+                <junit>
+			<classpath>
+				<path refid="classpath"/>
+			</classpath>
+			<formatter type="xml"/>
+			<formatter type="plain" usefile="false" />
+                        <!-- Uncomment this sys prop to workaround this Glassfish 3.1 Jersey bug - https://glassfish.dev.java.net/issues/show_bug.cgi?id=13131 -->
+                        <sysproperty key="com.sun.jersey.server.impl.cdi.lookupExtensionInBeanManager" value="true"/>
+			<test name="org.jboss.weld.atinject.tck.AtInjectTCK"
+                              todir="${report.dir}"/>
+		</junit>
+                <antcall target="report"/>
+	</target>
+
+        <target name="report">
+		<junitreport todir="${report.dir}">
+			<fileset dir="${report.dir}">
+				<include name="*.xml"/>
+			</fileset>
+			<report format="frames" todir="${report.dir}"/>
+		</junitreport>
+                <echo message="Report written to ${report.dir}"/>
+	</target>
+
+	<target name="install" depends="dist">
+		<unzip src="${dist}/${dist.file}-${tck.version}_${time.stamp.bundle.string}.zip" dest="${tck.home}" />
+	</target>
+
+	<target name="clean">
+		<delete dir="${dist}" />
+	</target>
+
+	<target name="prepare">
+		<tstamp />
+		<mkdir dir="${dist}" />
+	</target>
+
+	<target name="dist" depends="clean, prepare">
+		<if>
+			<available file="${basedir}/build.properties.sani"/>
+			<then>
+				<property name="prop.file" value="build.properties.sani"/>
+			</then>
+			<else>
+				<property name="prop.file" value="build.properties"/>
+			</else>
+		</if>
+
+		<tstamp>
+			<format property="time.stamp.bundle.string" pattern="dd-MMM-yyyy" locale="en" />
+		</tstamp>
+		<zip destfile="${dist}/${dist.file}-${tck.version}_${time.stamp.bundle.string}.zip" update="true">
+			<zipfileset dir="${basedir}" includes="build.xml, classes/**,
+                            xml/**, bin/**, lib/**, src/**, readme.txt" prefix="330-tck-glassfish-porting" />
+			<zipfileset dir="${basedir}" includes="${prop.file}" fullpath="330-tck-glassfish-porting/build.properties" />
+		</zip>
+
+		<delete file="${basedir}/build.properties.sani" quiet="true" />
+	</target>
+
+	<target name="dist.sani">
+		<edit.prop.file />
+		<antcall target="dist" />
+	</target>
+
+	<macrodef name="edit.prop.file">
+		<sequential>
+			<loadfile srcfile="${basedir}/build.properties" property="props" />
+
+			<propertyregex property="tck.home.prop" input="${props}" regexp="(tck.home=)(.*)" replace="\1" defaultvalue="${props}" override="true" />
+
+			<propertyregex property="porting.home.prop"
+	                 input="${tck.home.prop}"
+	                 regexp="(porting.home=)(.*)"
+	                 replace="\1"
+	                 defaultvalue="${tck.home.prop}"
+	                 override="true"/>
+
+            <propertyregex property="glassfish.home.prop"
+                     input="${porting.home.prop}"
+                     regexp="(glassfish.home=)(.*)"
+                     replace="\1"
+                     defaultvalue="${porting.home.prop}"
+                     override="true"/>
+
+			<propertyregex property="299.tck.home"
+                                 input="${glassfish.home.prop}"
+                                 regexp="(299.tck.home=)(.*)"
+                                 replace="\1"
+                                 defaultvalue="${glassfish.home.prop}"
+                                 override="true"/>
+
+			<echo message="${glassfish.home.prop}"
+                          file="${basedir}/build.properties.sani"/>
+
+		</sequential>
+	</macrodef>
+
+</project>
