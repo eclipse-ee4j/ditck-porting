@@ -48,7 +48,7 @@ spec:
   }
   parameters {
     string(name: 'GF_BUNDLE_URL', 
-           defaultValue: 'http://download.oracle.com/glassfish/5.0.1/nightly/latest-glassfish.zip', 
+           defaultValue: 'https://download.eclipse.org/ee4j/jakartaee-tck/8.0.1/nightly/glassfish.zip', 
            description: 'URL required for downloading GlassFish Full/Web profile bundle' )
     string(name: 'JAVAX_INJECT_TCK_URL',
            defaultValue: 'https://github.com/javax-inject/javax-inject/releases/download/1/javax.inject-tck.zip',
