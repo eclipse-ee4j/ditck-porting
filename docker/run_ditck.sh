@@ -61,5 +61,6 @@ cp ${REPORT}/index.html  ${REPORT}/report.html
 echo "Saving TCK results"
 
 mv $REPORT/TESTS-TestSuites.xml $REPORT/330tck-junit-report.xml
+rm $REPORT/TEST-*.xml 
 
 tar zcvf ${WORKSPACE}/330tck-results.tar.gz ${REPORT}
