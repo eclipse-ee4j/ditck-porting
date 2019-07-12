@@ -18,7 +18,7 @@
 VER="1.0"
 
 if ls ${WORKSPACE}/bundles/*330-tck-glassfish-porting-*.zip 1> /dev/null 2>&1; then
-  unzip ${WORKSPACE}/bundles/*330-tck-glassfish-porting-*.zip -d ${WORKSPACE}
+  unzip -o ${WORKSPACE}/bundles/*330-tck-glassfish-porting-*.zip -d ${WORKSPACE}
 else
   echo "[ERROR] TCK bundle not found"
   exit 1
