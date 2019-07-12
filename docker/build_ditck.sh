@@ -24,7 +24,7 @@ cd $WORKSPACE
 if [ ! -z "$TCK_BUNDLE_BASE_URL" ]; then
   #use pre-built tck bundle from this location to run test
   mkdir -p ${WORKSPACE}/bundles
-  wget  --progress=bar:force --no-cache ${TCK_BUNDLE_BASE_URL}/${TCK_BUNDLE_FILE_NAME} -O ${WORKSPACE}/bundles/330-tck-glassfish-porting-1.0_latest.zip
+  wget  --progress=bar:force --no-cache ${TCK_BUNDLE_BASE_URL}/${TCK_BUNDLE_FILE_NAME} -O ${WORKSPACE}/bundles/${TCK_BUNDLE_FILE_NAME}
   exit 0
 fi
 
