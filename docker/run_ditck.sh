@@ -16,7 +16,13 @@
 
 
 VER="1.0"
-unzip -o ${WORKSPACE}/bundles/330-tck-glassfish-porting-1.0_latest.zip -d ${WORKSPACE}
+
+if ls ${WORKSPACE}/bundles/*330-tck-glassfish-porting-*.zip 1> /dev/null 2>&1; then
+  unzip ${WORKSPACE}/bundles/*330-tck-glassfish-porting-*.zip -d ${WORKSPACE}
+else
+  echo "[ERROR] TCK bundle not found"
+  exit 1
+fi
 
 export TS_HOME=${WORKSPACE}/330-tck-glassfish-porting
 

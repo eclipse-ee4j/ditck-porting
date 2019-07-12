@@ -20,6 +20,14 @@ echo "export MAVEN_HOME=$MAVEN_HOME"
 echo "export PATH=$PATH"
  
 cd $WORKSPACE
+
+if [ ! -z "$TCK_BUNDLE_BASE_URL" ]; then
+  #use pre-built tck bundle from this location to run test
+  mkdir -p ${WORKSPACE}/bundles
+  wget  --progress=bar:force --no-cache ${TCK_BUNDLE_BASE_URL}/${TCK_BUNDLE_FILE_NAME} -O ${WORKSPACE}/bundles/330-tck-glassfish-porting-1.0_latest.zip
+  exit 0
+fi
+
 WGET_PROPS="--progress=bar:force --no-cache"
 wget $WGET_PROPS $GF_BUNDLE_URL -O ${WORKSPACE}/latest-glassfish.zip
 unzip -o ${WORKSPACE}/latest-glassfish.zip -d ${WORKSPACE}

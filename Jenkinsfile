@@ -56,6 +56,12 @@ spec:
     string(name: 'JSR299_TCK_URL', 
            defaultValue: 'https://sourceforge.net/projects/jboss/files/CDI-TCK/1.0.6.Final/jsr299-tck-1.0.6.Final-dist.zip/download',
            description: 'URL required for downloading JSR 299 TCK bundle' )
+    string(name: 'TCK_BUNDLE_BASE_URL',
+           defaultValue: '',
+           description: 'Base URL required for downloading prebuilt binary TCK Bundle from a hosted location' )
+    string(name: 'TCK_BUNDLE_FILE_NAME', 
+           defaultValue: '330-tck-glassfish-porting-1.0_latest.zip', 
+	   description: 'Name of bundle file to be appended to the base url' )
   }
 
   environment {
