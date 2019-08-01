@@ -60,7 +60,7 @@ spec:
            defaultValue: '',
            description: 'Base URL required for downloading prebuilt binary TCK Bundle from a hosted location' )
     string(name: 'TCK_BUNDLE_FILE_NAME', 
-           defaultValue: '330-tck-glassfish-porting-1.0_latest.zip', 
+           defaultValue: '330-tck-glassfish-porting-1.0.0.zip', 
 	   description: 'Name of bundle file to be appended to the base url' )
   }
 
