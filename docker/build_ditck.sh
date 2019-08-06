@@ -48,7 +48,7 @@ ant dist.sani
 mkdir -p ${WORKSPACE}/bundles
 chmod 777 ${WORKSPACE}/dist/*.zip
 cd ${WORKSPACE}/dist/
-for entry in `ls 330-tck-glassfish-porting-1.0.0.zip`; do
+for entry in `ls 330-tck-*.zip`; do
   date=`echo "$entry" | cut -d_ -f2`
   strippedEntry=`echo "$entry" | cut -d_ -f1`
   echo "copying ${WORKSPACE}/dist/$entry to ${WORKSPACE}/bundles/${strippedEntry}_latest.zip"
