@@ -54,16 +54,21 @@ unzip ${WORKSPACE}/jsr299-tck.zip -d ${WORKSPACE}
 # Install the porting lib
 cd ${WORKSPACE}/cdi-tck-2.0.6/weld/porting-package-lib
 mvn install
+echo "+++ Installed CDI TCK porting libs"
+ls target/dependency
+cd ${WORKSPACE}
 
 #Edit test properties
 sed -i "s#ts.home=.*#ts.home=${WORKSPACE}#g" ${TS_HOME}/build.properties
-sed -i "s#porting.home=.*#porting.home=${TS_HOME}#g" ${TS_HOME}/build.properties
+sed -i "s#porting.home=.*#porting.home=${WORKSPACE}/cdi-tck-2.0.6/weld/porting-package-lib/target/dependency#g" ${TS_HOME}/build.properties
 sed -i "s#glassfish.home=.*#glassfish.home=${WORKSPACE}/glassfish5/glassfish#g" ${TS_HOME}/build.properties
 sed -i "s#299.tck.home=.*#299.tck.home=${WORKSPACE}/cdi-tck-2.0.6#g" ${TS_HOME}/build.properties
 sed -i "s#report.dir=.*#report.dir=${REPORT}#g" ${TS_HOME}/build.properties
 
 #Run Tests
 cd ${TS_HOME}
+echo "+++ Ant build.properties:"
+cat build.properties
 ant run
 
 #Generate Reports

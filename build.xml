@@ -48,7 +48,7 @@
 			<include name="javax.inject-tck.jar" />
 		</fileset>
 		<fileset dir="${porting.home}/lib">
-			<include name="weld-inject-tck-runner-1.0.0-tests.jar" />
+			<include name="weld-inject-tck-runner-tests.jar" />
 		</fileset>
                 <pathelement location="${slf4j.jar}"/>
 	</path>
