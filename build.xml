@@ -27,8 +27,8 @@
 	<property name="dist" value="${basedir}/dist" />
 	<property name="lib" value="${basedir}/lib" />
 	<property name="dist.file" value="330-tck-glassfish-porting" />
-	<property name="slf4j.jar" value="${porting.home}/lib/slf4j-simple-1.7.25.jar" />
-	<property name="junit.jar" value="${porting.home}/lib/junit-4.12.jar" />
+	<property name="slf4j.jar" value="${porting.home}/slf4j-simple-1.7.25.jar" />
+	<property name="junit.jar" value="${porting.home}/junit-4.12.jar" />
 
 	<taskdef resource="net/sf/antcontrib/antlib.xml" classpath="${lib}/ant-contrib.jar" />
 
@@ -47,7 +47,7 @@
 		<fileset dir="${tck.home}">
 			<include name="javax.inject-tck.jar" />
 		</fileset>
-		<fileset dir="${porting.home}/lib">
+		<fileset dir="${porting.home}">
 			<include name="weld-inject-tck-runner-tests.jar" />
 		</fileset>
                 <pathelement location="${slf4j.jar}"/>
