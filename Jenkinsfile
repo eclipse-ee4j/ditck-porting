@@ -51,11 +51,11 @@ spec:
            defaultValue: 'https://download.eclipse.org/ee4j/jakartaee-tck/8.0.1/nightly/glassfish.zip', 
            description: 'URL required for downloading GlassFish Full/Web profile bundle' )
     string(name: 'JAVAX_INJECT_TCK_URL',
-           defaultValue: 'https://github.com/javax-inject/javax-inject/releases/download/1/javax.inject-tck.zip',
-           description: 'URL required for downloading AT Inject TCK Bundle' )
+           defaultValue: 'http://download.eclipse.org/ee4j/cdi/jakarta.inject-tck-1.0-bin.zip',
+           description: 'URL required for downloading Jakarta DI TCK Bundle' )
     string(name: 'JSR299_TCK_URL', 
-           defaultValue: 'https://sourceforge.net/projects/jboss/files/CDI-TCK/1.0.6.Final/jsr299-tck-1.0.6.Final-dist.zip/download',
-           description: 'URL required for downloading JSR 299 TCK bundle' )
+           defaultValue: 'http://download.eclipse.org/ee4j/cdi/cdi-tck-2.0.6-dist.zip',
+           description: 'URL required for downloading Jakarta CDI TCK bundle' )
     string(name: 'TCK_BUNDLE_BASE_URL',
            defaultValue: '',
            description: 'Base URL required for downloading prebuilt binary TCK Bundle from a hosted location' )

@@ -27,8 +27,8 @@
 	<property name="dist" value="${basedir}/dist" />
 	<property name="lib" value="${basedir}/lib" />
 	<property name="dist.file" value="330-tck-glassfish-porting" />
-	<property name="slf4j.jar" value="${porting.home}/lib/slf4j-simple-1.7.25.jar" />
-	<property name="junit.jar" value="${porting.home}/lib/junit-4.12.jar" />
+	<property name="slf4j.jar" value="${porting.home}/slf4j-simple-1.7.25.jar" />
+	<property name="junit.jar" value="${porting.home}/junit-4.12.jar" />
 
 	<taskdef resource="net/sf/antcontrib/antlib.xml" classpath="${lib}/ant-contrib.jar" />
 
@@ -47,8 +47,8 @@
 		<fileset dir="${tck.home}">
 			<include name="javax.inject-tck.jar" />
 		</fileset>
-		<fileset dir="${porting.home}/lib">
-			<include name="weld-inject-tck-runner-1.0.0-tests.jar" />
+		<fileset dir="${porting.home}">
+			<include name="weld-inject-tck-runner-tests.jar" />
 		</fileset>
                 <pathelement location="${slf4j.jar}"/>
 	</path>
@@ -56,8 +56,14 @@
 	<target name="downloadDependencies">
 		<get src="http://central.maven.org/maven2/junit/junit/4.12/junit-4.12.jar" verbose="on" dest="lib"/>
 		<get src="http://central.maven.org/maven2/org/slf4j/slf4j-simple/1.7.25/slf4j-simple-1.7.25.jar" verbose="on" dest="lib"/>
+		<get src="https://repo1.maven.org/maven2/org/jboss/arquillian/container/arquillian-weld-embedded/2.0.1.Final/arquillian-weld-embedded-2.0.1.Final.jar" verbose="on" dest="${porting.home}"/>
 	</target>
-	<target name="run" depends="downloadDependencies">
+	<target name="print-classpath">
+
+		<pathconvert property="classpathValue" refid="classpath" />
+		<echo>Classpath is ${classpathValue}</echo>
+	</target>
+	<target name="run" depends="downloadDependencies,print-classpath">
 		<mkdir dir="${report.dir}"/>
                 <junit>
 			<classpath>
