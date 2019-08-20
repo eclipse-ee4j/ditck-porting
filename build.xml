@@ -57,7 +57,12 @@
 		<get src="http://central.maven.org/maven2/junit/junit/4.12/junit-4.12.jar" verbose="on" dest="lib"/>
 		<get src="http://central.maven.org/maven2/org/slf4j/slf4j-simple/1.7.25/slf4j-simple-1.7.25.jar" verbose="on" dest="lib"/>
 	</target>
-	<target name="run" depends="downloadDependencies">
+	<target name="print-classpath">
+
+		<pathconvert property="classpathValue" refid="classpath" />
+		<echo>Classpath is ${classpathValue}</echo>
+	</target>
+	<target name="run" depends="downloadDependencies,print-classpath">
 		<mkdir dir="${report.dir}"/>
                 <junit>
 			<classpath>
