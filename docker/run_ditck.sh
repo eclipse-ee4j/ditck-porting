@@ -40,10 +40,10 @@ ant -version
 REPORT=${WORKSPACE}/330tck-report
 mkdir -p ${REPORT}
 if [ -z "${JAVAX_INJECT_TCK_URL}" ];then
-  JAVAX_INJECT_TCK_URL=https://github.com/javax-inject/javax-inject/releases/download/1/javax.inject-tck.zip
+  JAVAX_INJECT_TCK_URL=http://download.eclipse.org/ee4j/cdi/jakarta.inject-tck-1.0-bin.zip
 fi
 if [ -z "${JSR299_TCK_URL}" ];then
-  JSR299_TCK_URL=https://sourceforge.net/projects/jboss/files/CDI-TCK/1.0.6.Final/jsr299-tck-1.0.6.Final-dist.zip/download
+  JSR299_TCK_URL=http://download.eclipse.org/ee4j/cdi/cdi-tck-2.0.6-dist.zip
 fi
 
 wget ${JAVAX_INJECT_TCK_URL} -O ${WORKSPACE}/javax.inject-tck.zip 
@@ -51,11 +51,15 @@ wget ${JSR299_TCK_URL} -O ${WORKSPACE}/jsr299-tck.zip
 unzip ${WORKSPACE}/javax.inject-tck.zip  -d ${WORKSPACE}
 unzip ${WORKSPACE}/jsr299-tck.zip -d ${WORKSPACE}
 
+# Install the porting lib
+cd ${WORKSPACE}/cdi-tck-2.0.6/weld/porting-package-lib
+mvn install
+
 #Edit test properties
 sed -i "s#ts.home=.*#ts.home=${WORKSPACE}#g" ${TS_HOME}/build.properties
 sed -i "s#porting.home=.*#porting.home=${TS_HOME}#g" ${TS_HOME}/build.properties
 sed -i "s#glassfish.home=.*#glassfish.home=${WORKSPACE}/glassfish5/glassfish#g" ${TS_HOME}/build.properties
-sed -i "s#299.tck.home=.*#299.tck.home=${WORKSPACE}/jsr299-tck-1.0.6.Final#g" ${TS_HOME}/build.properties
+sed -i "s#299.tck.home=.*#299.tck.home=${WORKSPACE}/cdi-tck-2.0.6#g" ${TS_HOME}/build.properties
 sed -i "s#report.dir=.*#report.dir=${REPORT}#g" ${TS_HOME}/build.properties
 
 #Run Tests
