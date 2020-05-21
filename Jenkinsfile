@@ -48,19 +48,25 @@ spec:
   }
   parameters {
     string(name: 'GF_BUNDLE_URL', 
-           defaultValue: 'https://download.eclipse.org/ee4j/jakartaee-tck/8.0.1/nightly/glassfish.zip', 
+           defaultValue: 'https://ci.eclipse.org/jakartaee-tck/job/build-glassfish/lastSuccessfulBuild/artifact/appserver/distributions/glassfish/target/glassfish.zip', 
            description: 'URL required for downloading GlassFish Full/Web profile bundle' )
-    string(name: 'JAVAX_INJECT_TCK_URL',
-           defaultValue: 'http://download.eclipse.org/ee4j/cdi/jakarta.inject-tck-1.0-bin.zip',
+    string(name: 'JAKARTA_INJECT_TCK_URL',
+           defaultValue: 'https://download.eclipse.org/ee4j/cdi/jakarta.inject-tck-2.0.0-RC4-bin.zip',
            description: 'URL required for downloading Jakarta DI TCK Bundle' )
+    string(name: 'JAKARTA_INJECT_VERSION',
+           defaultValue: '2.0.0-RC4',
+           description: 'Jakarta DI TCK VERSION' )
     string(name: 'JSR299_TCK_URL', 
-           defaultValue: 'http://download.eclipse.org/ee4j/cdi/cdi-tck-2.0.6-dist.zip',
+           defaultValue: 'https://download.eclipse.org/ee4j/cdi/cdi-tck-3.0.0-M3-dist.zip',
            description: 'URL required for downloading Jakarta CDI TCK bundle' )
+    string(name: 'JSR299_TCK_VERSION', 
+           defaultValue: '3.0.0-M3',
+           description: 'CDI TCK version' )
     string(name: 'TCK_BUNDLE_BASE_URL',
            defaultValue: '',
            description: 'Base URL required for downloading prebuilt binary TCK Bundle from a hosted location' )
     string(name: 'TCK_BUNDLE_FILE_NAME', 
-           defaultValue: '330-tck-glassfish-porting-1.0.0.zip', 
+           defaultValue: '330-tck-glassfish-porting-2.0.0.zip', 
 	   description: 'Name of bundle file to be appended to the base url' )
   }
 
