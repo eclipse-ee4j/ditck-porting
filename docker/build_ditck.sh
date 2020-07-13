@@ -1,6 +1,6 @@
 #!/bin/bash -x
 #
-# Copyright (c) 2019 Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2019, 2020 Oracle and/or its affiliates. All rights reserved.
 #
 # This program and the accompanying materials are made available under the
 # terms of the Eclipse Public License v. 2.0, which is available at
@@ -39,7 +39,7 @@ which mvn
 mvn -version
 
 sed -i "s#^porting\.home=.*#porting.home=$WORKSPACE#g" "$WORKSPACE/build.xml"
-sed -i "s#^glassfish\.home=.*#glassfish.home=$WORKSPACE/glassfish5/glassfish#g" "$WORKSPACE/build.xml"
+sed -i "s#^glassfish\.home=.*#glassfish.home=$WORKSPACE/glassfish6/glassfish#g" "$WORKSPACE/build.xml"
  
 ant -version
 ant dist.sani
