@@ -37,6 +37,14 @@ unzip -o ${WORKSPACE}/latest-glassfish.zip -d ${WORKSPACE}
 which ant
 ant -version
 
+if [[ "$JDK" == "JDK11" || "$JDK" == "jdk11" ]];then
+  export JAVA_HOME=${JDK11_HOME}
+  export PATH=$JAVA_HOME/bin:$PATH
+fi
+
+which java
+java -version
+
 REPORT=${WORKSPACE}/330tck-report
 mkdir -p ${REPORT}
 if [ -z "${JAKARTA_INJECT_TCK_URL}" ];then
