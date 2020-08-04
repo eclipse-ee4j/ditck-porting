@@ -51,16 +51,16 @@ spec:
            defaultValue: 'https://ci.eclipse.org/jakartaee-tck/job/build-glassfish/lastSuccessfulBuild/artifact/appserver/distributions/glassfish/target/glassfish.zip', 
            description: 'URL required for downloading GlassFish Full/Web profile bundle' )
     string(name: 'JAKARTA_INJECT_TCK_URL',
-           defaultValue: 'https://download.eclipse.org/ee4j/cdi/jakarta.inject-tck-2.0.0-RC4-bin.zip',
+           defaultValue: 'https://download.eclipse.org/ee4j/cdi/inject/2.0/jakarta.inject-tck-2.0.1-bin.zip',
            description: 'URL required for downloading Jakarta DI TCK Bundle' )
     string(name: 'JAKARTA_INJECT_VERSION',
-           defaultValue: '2.0.0-RC4',
+           defaultValue: '2.0.1',
            description: 'Jakarta DI TCK VERSION' )
     string(name: 'JSR299_TCK_URL', 
-           defaultValue: 'https://download.eclipse.org/ee4j/cdi/cdi-tck-3.0.0-M3-dist.zip',
+           defaultValue: 'https://jakarta.oss.sonatype.org/content/repositories/staging/jakarta/enterprise/cdi-tck-dist/3.0.0-RC1/cdi-tck-dist-3.0.0-RC1-dist.zip',
            description: 'URL required for downloading Jakarta CDI TCK bundle' )
     string(name: 'JSR299_TCK_VERSION', 
-           defaultValue: '3.0.0-M3',
+           defaultValue: '3.0.0-RC1',
            description: 'CDI TCK version' )
     string(name: 'TCK_BUNDLE_BASE_URL',
            defaultValue: '',
