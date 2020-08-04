@@ -29,7 +29,7 @@ export TS_HOME=${WORKSPACE}/330-tck-glassfish-porting
 #Install Glassfish
 echo "Download and install GlassFish 6 ..."
 if [ -z "${GF_BUNDLE_URL}" ]; then
-  export GF_BUNDLE_URL="https://ci.eclipse.org/jakartaee-tck/job/build-glassfish/lastSuccessfulBuild/artifact/appserver/distributions/glassfish/target/glassfish.zip"
+  export GF_BUNDLE_URL="https://download.eclipse.org/ee4j/glassfish/glassfish-6.0.0-SNAPSHOT-nightly.zip"
 fi
 wget --progress=bar:force --no-cache $GF_BUNDLE_URL -O latest-glassfish.zip
 unzip -o ${WORKSPACE}/latest-glassfish.zip -d ${WORKSPACE}
@@ -48,14 +48,14 @@ java -version
 REPORT=${WORKSPACE}/330tck-report
 mkdir -p ${REPORT}
 if [ -z "${JAKARTA_INJECT_TCK_URL}" ];then
-  JAKARTA_INJECT_TCK_URL=https://download.eclipse.org/ee4j/cdi/jakarta.inject-tck-2.0.0-bin.zip
+  JAKARTA_INJECT_TCK_URL=https://download.eclipse.org/ee4j/cdi/inject/2.0/jakarta.inject-tck-2.0.1-bin.zip
 fi
 if [ -z "${JSR299_TCK_URL}" ];then
   JSR299_TCK_URL=https://download.eclipse.org/ee4j/cdi/cdi-tck-3.0.0-dist.zip
 fi
 
 if [ -z "${JAKARTA_INJECT_VERSION}" ]; then
-  JAKARTA_INJECT_VERSION="2.0.0"
+  JAKARTA_INJECT_VERSION="2.0.1"
 fi
 
 if [ -z "${JSR299_TCK_VERSION}" ]; then
