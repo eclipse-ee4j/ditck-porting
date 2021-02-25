@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019, 2020 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2019, 2021 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0, which is available at
@@ -34,7 +34,7 @@ spec:
     - "localhost.localdomain"
   containers:
   - name: di-tck
-    image: anajosep/cts-base:0.1
+    image: jakartaee/cts-base:0.2
     command:
     - cat
     tty: true
@@ -48,7 +48,7 @@ spec:
   }
   parameters {
     string(name: 'GF_BUNDLE_URL', 
-           defaultValue: 'https://ci.eclipse.org/jakartaee-tck/job/build-glassfish/lastSuccessfulBuild/artifact/appserver/distributions/glassfish/target/glassfish.zip', 
+           defaultValue: 'https://download.eclipse.org/ee4j/glassfish/glassfish-6.1.0-SNAPSHOT-nightly.zip', 
            description: 'URL required for downloading GlassFish Full/Web profile bundle' )
     string(name: 'JAKARTA_INJECT_TCK_URL',
            defaultValue: 'https://download.eclipse.org/ee4j/cdi/inject/2.0/jakarta.inject-tck-2.0.1-bin.zip',
