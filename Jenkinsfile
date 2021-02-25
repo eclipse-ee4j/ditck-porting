@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019, 2021 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2019, 2022 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0, which is available at
@@ -34,7 +34,7 @@ spec:
     - "localhost.localdomain"
   containers:
   - name: di-tck
-    image: jakartaee/cts-base:0.2
+    image: jakartaee/cts-base:0.3
     command:
     - cat
     tty: true
@@ -48,19 +48,19 @@ spec:
   }
   parameters {
     string(name: 'GF_BUNDLE_URL', 
-           defaultValue: 'https://ci.eclipse.org/jakartaee-tck/job/build-glassfish/lastSuccessfulBuild/artifact/appserver/distributions/glassfish/target/glassfish.zip', 
+           defaultValue: 'https://download.eclipse.org/ee4j/glassfish/glassfish-7.0.0-SNAPSHOT-nightly.zip', 
            description: 'URL required for downloading GlassFish Full/Web profile bundle' )
     string(name: 'JAKARTA_INJECT_TCK_URL',
-           defaultValue: 'https://download.eclipse.org/ee4j/cdi/inject/2.0/jakarta.inject-tck-2.0.1-bin.zip',
+           defaultValue: 'https://download.eclipse.org/ee4j/cdi/inject/2.0/jakarta.inject-tck-2.0.2-bin.zip',
            description: 'URL required for downloading Jakarta DI TCK Bundle' )
     string(name: 'JAKARTA_INJECT_VERSION',
            defaultValue: '2.0.1',
            description: 'Jakarta DI TCK VERSION' )
     string(name: 'JSR299_TCK_URL', 
-           defaultValue: 'https://jakarta.oss.sonatype.org/content/repositories/staging/jakarta/enterprise/cdi-tck-dist/3.0.2/cdi-tck-dist-3.0.2-dist.zip',
+           defaultValue: 'https://download.eclipse.org/ee4j/cdi/4.0/cdi-tck-4.0.5-dist.zip',
            description: 'URL required for downloading Jakarta CDI TCK bundle' )
     string(name: 'JSR299_TCK_VERSION', 
-           defaultValue: '3.0.2',
+           defaultValue: '4.0.0',
            description: 'CDI TCK version' )
     string(name: 'TCK_BUNDLE_BASE_URL',
            defaultValue: '',
@@ -68,8 +68,8 @@ spec:
     string(name: 'TCK_BUNDLE_FILE_NAME', 
            defaultValue: '330-tck-glassfish-porting-2.0.0.zip', 
 	   description: 'Name of bundle file to be appended to the base url' )
-    choice(name: 'JDK', choices: 'JDK11\nJDK8',
-           description: 'Java SE Version to be used for running TCK either JDK8/JDK11' )
+    choice(name: 'JDK', choices: 'JDK11\nJDK17',
+           description: 'Java SE Version to be used for running TCK either JDK11/JDK17' )
   }
 
   environment {
