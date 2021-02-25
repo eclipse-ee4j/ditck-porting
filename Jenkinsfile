@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019, 2020 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2019, 2021 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0, which is available at
@@ -34,7 +34,7 @@ spec:
     - "localhost.localdomain"
   containers:
   - name: di-tck
-    image: anajosep/cts-base:0.1
+    image: jakartaee/cts-base:0.2
     command:
     - cat
     tty: true
@@ -57,10 +57,10 @@ spec:
            defaultValue: '2.0.1',
            description: 'Jakarta DI TCK VERSION' )
     string(name: 'JSR299_TCK_URL', 
-           defaultValue: 'https://jakarta.oss.sonatype.org/content/repositories/staging/jakarta/enterprise/cdi-tck-dist/3.0.0/cdi-tck-dist-3.0.0-dist.zip',
+           defaultValue: 'https://jakarta.oss.sonatype.org/content/repositories/staging/jakarta/enterprise/cdi-tck-dist/3.0.2/cdi-tck-dist-3.0.2-dist.zip',
            description: 'URL required for downloading Jakarta CDI TCK bundle' )
     string(name: 'JSR299_TCK_VERSION', 
-           defaultValue: '3.0.0',
+           defaultValue: '3.0.2',
            description: 'CDI TCK version' )
     string(name: 'TCK_BUNDLE_BASE_URL',
            defaultValue: '',
@@ -68,7 +68,7 @@ spec:
     string(name: 'TCK_BUNDLE_FILE_NAME', 
            defaultValue: '330-tck-glassfish-porting-2.0.0.zip', 
 	   description: 'Name of bundle file to be appended to the base url' )
-    choice(name: 'JDK', choices: 'JDK8\nJDK11',
+    choice(name: 'JDK', choices: 'JDK11\nJDK8',
            description: 'Java SE Version to be used for running TCK either JDK8/JDK11' )
   }
 

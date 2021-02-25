@@ -69,6 +69,7 @@ unzip ${WORKSPACE}/jsr299-tck.zip -d ${WORKSPACE}
 
 # Install the porting lib
 cd ${WORKSPACE}/cdi-tck-${JSR299_TCK_VERSION}/weld/porting-package-lib
+sed -i 's/3.0.2/3.0.0/g' pom.xml
 mvn install
 echo "+++ Installed CDI TCK porting libs"
 ls target/dependency
