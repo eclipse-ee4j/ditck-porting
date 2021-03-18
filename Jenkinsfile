@@ -48,7 +48,7 @@ spec:
   }
   parameters {
     string(name: 'GF_BUNDLE_URL', 
-           defaultValue: 'https://download.eclipse.org/ee4j/glassfish/glassfish-6.1.0-SNAPSHOT-nightly.zip', 
+           defaultValue: 'https://ci.eclipse.org/jakartaee-tck/job/build-glassfish/lastSuccessfulBuild/artifact/appserver/distributions/glassfish/target/glassfish.zip', 
            description: 'URL required for downloading GlassFish Full/Web profile bundle' )
     string(name: 'JAKARTA_INJECT_TCK_URL',
            defaultValue: 'https://download.eclipse.org/ee4j/cdi/inject/2.0/jakarta.inject-tck-2.0.1-bin.zip',
@@ -57,10 +57,10 @@ spec:
            defaultValue: '2.0.1',
            description: 'Jakarta DI TCK VERSION' )
     string(name: 'JSR299_TCK_URL', 
-           defaultValue: 'https://jakarta.oss.sonatype.org/content/repositories/staging/jakarta/enterprise/cdi-tck-dist/3.0.0/cdi-tck-dist-3.0.0-dist.zip',
+           defaultValue: 'https://jakarta.oss.sonatype.org/content/repositories/staging/jakarta/enterprise/cdi-tck-dist/3.0.2/cdi-tck-dist-3.0.2-dist.zip',
            description: 'URL required for downloading Jakarta CDI TCK bundle' )
     string(name: 'JSR299_TCK_VERSION', 
-           defaultValue: '3.0.0',
+           defaultValue: '3.0.2',
            description: 'CDI TCK version' )
     string(name: 'TCK_BUNDLE_BASE_URL',
            defaultValue: '',
@@ -68,7 +68,7 @@ spec:
     string(name: 'TCK_BUNDLE_FILE_NAME', 
            defaultValue: '330-tck-glassfish-porting-2.0.0.zip', 
 	   description: 'Name of bundle file to be appended to the base url' )
-    choice(name: 'JDK', choices: 'JDK8\nJDK11',
+    choice(name: 'JDK', choices: 'JDK11\nJDK8',
            description: 'Java SE Version to be used for running TCK either JDK8/JDK11' )
   }
 
