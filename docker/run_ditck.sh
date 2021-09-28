@@ -1,6 +1,6 @@
 #!/bin/bash -xe
 #
-# Copyright (c) 2019, 2020 Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2019, 2021 Oracle and/or its affiliates. All rights reserved.
 #
 # This program and the accompanying materials are made available under the
 # terms of the Eclipse Public License v. 2.0, which is available at
@@ -29,7 +29,7 @@ export TS_HOME=${WORKSPACE}/330-tck-glassfish-porting
 #Install Glassfish
 echo "Download and install GlassFish 6 ..."
 if [ -z "${GF_BUNDLE_URL}" ]; then
-  export GF_BUNDLE_URL="https://download.eclipse.org/ee4j/glassfish/glassfish-6.0.0-SNAPSHOT-nightly.zip"
+  export GF_BUNDLE_URL="https://download.eclipse.org/ee4j/glassfish/glassfish-6.1.0-SNAPSHOT-nightly.zip"
 fi
 wget --progress=bar:force --no-cache $GF_BUNDLE_URL -O latest-glassfish.zip
 unzip -o ${WORKSPACE}/latest-glassfish.zip -d ${WORKSPACE}
