@@ -54,13 +54,13 @@ spec:
            defaultValue: 'https://download.eclipse.org/ee4j/cdi/inject/2.0/jakarta.inject-tck-2.0.2-bin.zip',
            description: 'URL required for downloading Jakarta DI TCK Bundle' )
     string(name: 'JAKARTA_INJECT_VERSION',
-           defaultValue: '2.0.1',
+           defaultValue: '2.0.2',
            description: 'Jakarta DI TCK VERSION' )
     string(name: 'JSR299_TCK_URL', 
            defaultValue: 'https://download.eclipse.org/ee4j/cdi/4.0/cdi-tck-4.0.5-dist.zip',
            description: 'URL required for downloading Jakarta CDI TCK bundle' )
     string(name: 'JSR299_TCK_VERSION', 
-           defaultValue: '4.0.0',
+           defaultValue: '4.0.5',
            description: 'CDI TCK version' )
     string(name: 'TCK_BUNDLE_BASE_URL',
            defaultValue: '',
