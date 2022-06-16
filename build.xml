@@ -21,14 +21,14 @@
 
 	<property file="${basedir}/build.properties" />
 
-	<property name="tck.version" value="2.0.1"/>
+	<property name="tck.version" value="2.0.2"/>
 	<property name="src" value="${basedir}/src" />
 	<property name="classes" value="${basedir}/classes" />
 	<property name="dist" value="${basedir}/dist" />
 	<property name="lib" value="${basedir}/lib" />
 	<property name="dist.file" value="330-tck-glassfish-porting" />
-	<property name="slf4j.jar" value="${porting.home}/lib/slf4j-simple-1.7.25.jar" />
-	<property name="junit.jar" value="${porting.home}/lib/junit-4.12.jar" />
+	<property name="slf4j.jar" value="${lib}/slf4j-simple-1.7.25.jar" />
+	<property name="junit.jar" value="${lib}/junit-4.12.jar" />
 
 	<taskdef resource="net/sf/antcontrib/antlib.xml" classpath="${lib}/ant-contrib.jar" />
 
@@ -41,41 +41,58 @@
 		<fileset dir="${glassfish.home}">
 			<include name="lib/*.jar" />
 		</fileset>
-		<fileset dir="${299.tck.home}">
-                        <include name="**/*.jar" /> <exclude name="**/jakarta.inject*.jar"/>
-		</fileset>
-		<fileset dir="${tck.home}">
-                        <include name="jakarta.inject-tck-*.jar" />
-		</fileset>
 		<fileset dir="${porting.home}">
-                        <include name="**/*.jar" />
+      <include name="**/*.jar" />
 		</fileset>
-                <pathelement location="${slf4j.jar}"/>
+		<pathelement location="${slf4j.jar}"/>
 	</path>
     <!--Proxy information should be provided in ANT_OPTS env variable as set ANT_OPTS=-Dhttp.proxyHost=host -Dhttp.proxyPort=port-->
 	<target name="downloadDependencies">
 		<get src="https://repo1.maven.org/maven2/junit/junit/4.12/junit-4.12.jar" verbose="on" dest="lib"/>
 		<get src="https://repo1.maven.org/maven2/org/slf4j/slf4j-simple/1.7.25/slf4j-simple-1.7.25.jar" verbose="on" dest="lib"/>
-		<get src="https://repo1.maven.org/maven2/org/jboss/arquillian/container/arquillian-weld-embedded/3.0.0.Alpha1/arquillian-weld-embedded-3.0.0.Alpha1.jar" verbose="on" dest="${porting.home}"/>
+		<get src="https://repo1.maven.org/maven2/org/jboss/weld/se/weld-se-core/5.0.0.SP2/weld-se-core-5.0.0.SP2.jar" verbose="on" dest="${porting.home}"/>
 	</target>
 	<target name="print-classpath">
 		<pathconvert property="classpathValue" refid="classpath" />
 		<echo>Classpath is ${classpathValue}</echo>
+		<echo>299.tck.home is ${299.tck.home}</echo>
+		<echo>tck.home is ${tck.home}</echo>
 	</target>
-	<target name="run" depends="downloadDependencies,print-classpath">
+	<target name="compile-runner">
+		<mkdir dir="${classes}" />
+		<unjar dest="${classes}" src="${299.tck.home}/jakarta.inject-tck-${tck.version}.jar">
+			<patternset>
+				<exclude name="META-INF/**" />
+			</patternset>
+		</unjar>
+		<javac srcdir="${299.tck.home}/example/src/test/java"
+					 classpathref="classpath"
+					 classpath="${classes}"
+					 destdir="${classes}"
+		/>
+		<copy todir="${classes}">
+			<fileset dir="${299.tck.home}/example/src/test/resources">
+				<patternset>
+					<include name="META-INF/**" />
+				</patternset>
+			</fileset>
+		</copy>
+	</target>
+	<target name="run" depends="downloadDependencies,print-classpath,compile-runner">
 		<mkdir dir="${report.dir}"/>
-                <junit>
+		<junit>
 			<classpath>
+				<pathelement location="${classes}" />
 				<path refid="classpath"/>
 			</classpath>
 			<formatter type="xml"/>
 			<formatter type="plain" usefile="false" />
                         <!-- Uncomment this sys prop to workaround this Glassfish 3.1 Jersey bug - https://glassfish.dev.java.net/issues/show_bug.cgi?id=13131 -->
-                        <sysproperty key="com.sun.jersey.server.impl.cdi.lookupExtensionInBeanManager" value="true"/>
-			<test name="org.jboss.weld.atinject.tck.AtInjectTCK"
-                              todir="${report.dir}"/>
+                       <sysproperty key="com.sun.jersey.server.impl.cdi.lookupExtensionInBeanManager" value="true"/>
+			<test name="weld.SampleBootstrapTCK"
+			  todir="${report.dir}"/>
 		</junit>
-                <antcall target="report"/>
+		<antcall target="report"/>
 	</target>
 
         <target name="report">
