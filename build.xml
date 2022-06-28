@@ -60,18 +60,19 @@
 	</target>
 	<target name="compile-runner">
 		<mkdir dir="${classes}" />
-		<unjar dest="${classes}" src="${299.tck.home}/jakarta.inject-tck-${tck.version}.jar">
+		<unjar dest="${classes}" src="${tck.home}/jakarta.inject-tck-${tck.version}.jar">
 			<patternset>
 				<exclude name="META-INF/**" />
 			</patternset>
 		</unjar>
-		<javac srcdir="${299.tck.home}/example/src/test/java"
+		<javac srcdir="${tck.home}/example/src/test/java"
 					 classpathref="classpath"
 					 classpath="${classes}"
-					 destdir="${classes}"
-		/>
+					 destdir="${classes}">
+		  <compilerarg value="-Xlint:unchecked"/>
+		</javac>
 		<copy todir="${classes}">
-			<fileset dir="${299.tck.home}/example/src/test/resources">
+			<fileset dir="${tck.home}/example/src/test/resources">
 				<patternset>
 					<include name="META-INF/**" />
 				</patternset>
