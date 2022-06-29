@@ -50,7 +50,8 @@
 	<target name="downloadDependencies">
 		<get src="https://repo1.maven.org/maven2/junit/junit/4.12/junit-4.12.jar" verbose="on" dest="lib"/>
 		<get src="https://repo1.maven.org/maven2/org/slf4j/slf4j-simple/1.7.25/slf4j-simple-1.7.25.jar" verbose="on" dest="lib"/>
-		<get src="https://repo1.maven.org/maven2/org/jboss/weld/se/weld-se-core/5.0.0.SP2/weld-se-core-5.0.0.SP2.jar" verbose="on" dest="${porting.home}"/>
+		<get src="https://repo1.maven.org/maven2/org/jboss/weld/se/weld-se-core/5.0.0.SP2/weld-se-core-5.0.0.SP2.jar" verbose="on" dest="lib"/>
+		<get src="https://repo1.maven.org/maven2/org/jboss/weld/se/weld-se-shaded/5.0.0.SP2/weld-se-shaded-5.0.0.SP2.jar" verbose="on" dest="lib"/>
 	</target>
 	<target name="print-classpath">
 		<pathconvert property="classpathValue" refid="classpath" />
